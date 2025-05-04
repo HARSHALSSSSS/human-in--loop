@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Salon Supervisor Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .card {
+      border-radius: 1rem;
+    }
+    textarea {
+      resize: none;
+    }
+  </style>
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">Supervisor</a>
+      <div class="d-flex">
+        <a href="/" class="btn btn-outline-primary me-2 {% if view != 'resolved' %}active{% endif %}">🔄 Pending</a>
+        <a href="/history" class="btn btn-outline-secondary {% if view == 'resolved' %}active{% endif %}">📜 History</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+<div class="container">
+  {% if view == 'resolved' %}
+    <h3 class="mb-3">📜 Resolved Request History</h3>
+  {% else %}
+    <h3 class="mb-3">📝 Pending Help Requests</h3>
+  {% endif %}
+
+  <!-- 🔹 Dynamic requests will be added here -->
+  <div id="requests"></div>
+
+  {% if requests %}
+    {% for request in requests %}
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h5 class="card-title">👤 Customer: {{ request[1] }}</h5>
+          <p class="card-text"><strong>❓ Question:</strong> {{ request[2] }}</p>
+
+          {% if view == 'resolved' %}
+            <p class="card-text mt-3"><strong>💬 Answer:</strong> {{ request[3] }}</p>
+
+            <!-- Actions for resolved requests -->
+            <form method="POST" action="/modify_request" class="d-flex gap-2">
+              <input type="hidden" name="request_id" value="{{ request[0] }}">
+
+              <button type="submit" name="action" value="hide" class="btn btn-warning btn-sm">
+                🙈 Hide
+              </button>
+
+              <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm">
+                🗑️ Delete Permanently
+              </button>
+            </form>
+
+          {% else %}
+            <!-- Answer form for pending requests -->
+            <form method="POST" action="/resolve">
+              <input type="hidden" name="request_id" value="{{ request[0] }}">
+              <input type="hidden" name="question" value="{{ request[2] }}">
+              <div class="mb-3">
+                <textarea name="answer" class="form-control" rows="3" placeholder="Type your answer..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-success">✅ Submit Answer</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="alert alert-info mt-4">
+      {% if view == 'resolved' %}
+        ℹ️ No resolved requests yet.
+      {% else %}
+        🎉 No pending requests right now.
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+
+  <!-- Socket.IO Script -->
+  <script>
+    const socket = io();
+
+    socket.on('connect', () => {
+      console.log("✅ Connected to Socket.IO");
+    });
+
+    socket.on('new_request', function (data) {
+      console.log("📩 New request received:", data);
+
+      const requestList = document.getElementById("requests");
+      const card = document.createElement("div");
+      card.className = "card shadow-sm mb-4";
+      card.innerHTML = `
+        <div class="card-body">
+          <h5 class="card-title">👤 Customer: Anonymous</h5>
+          <p class="card-text"><strong>❓ Question:</strong> ${data.question}</p>
+          <form method="POST" action="/resolve">
+            <input type="hidden" name="request_id" value="new">
+            <input type="hidden" name="question" value="${data.question}">
+            <div class="mb-3">
+              <textarea name="answer" class="form-control" rows="3" placeholder="Type your answer..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">✅ Submit Answer</button>
+          </form>
+        </div>
+      `;
+      requestList.prepend(card);
+    });
+  </script>
+
+</body>
+</html>
