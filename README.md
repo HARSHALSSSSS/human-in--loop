@@ -62,29 +62,35 @@ Copy
 Edit
 git clone [https://github.com/HARSHALSSSSS/human-in--loop](https://github.com/HARSHALSSSSS/human-in--loop)
 cd salon_ai_assistant
-2. Create and activate a virtual environment
+
+3. Create and activate a virtual environment
 bash
 Copy
 Edit
 python -m venv venv
 venv\Scripts\activate  # on Windows
-3. Install dependencies
+
+5. Install dependencies
 bash
 Copy
 Edit
-pip install -r requirements.txt
-4. Run the supervisor UI
+pip install -r requirements.txt\
+
+7. Run the supervisor UI
+ 
 bash
 Copy
 Edit
 cd supervisor_ui
 python app.py
-5. Run the AI agent (console mode)
+
+8. Run the AI agent (console mode)
 bash
 Copy
 Edit
 cd ../ai_agent
-python agent_main.py
+python agent.py
+
 🔐 LiveKit Integration (Optional, Audio Mode)
 Only needed if you're using the audio-based interaction.
 
@@ -94,8 +100,11 @@ ini
 Copy
 Edit
 LIVEKIT_API_KEY=your_key
+
 LIVEKIT_API_SECRET=your_secret
+
 LIVEKIT_URL=ws://localhost:7880
+
 Install the LiveKit Python SDK (custom fork or official):
 
 bash
@@ -103,6 +112,10 @@ Copy
 Edit
 pip install livekit-server-sdk
 Serve the customer_ui/index.html from a basic HTTP server or integrate into Flask.
+
+output screenshot :  ![Supervisor UI](images/supervisor_ui_screenshot.png)
+
+![Supervisor UI](images/supervisor_ui_screenshot.png)
 
 🔮 Future Improvements
 ✅ Replace polling with WebSocket-based real-time updates (more efficient)
@@ -115,16 +128,21 @@ Serve the customer_ui/index.html from a basic HTTP server or integrate into Flas
 
 🧑‍💻 Add authentication to supervisor dashboard
 
+
 📷 UI Highlights
+
 Supervisor UI
 
 Live list of pending questions
 
 "Answer", "Hide", and "Delete" buttons
 
+
 Smooth real-time update experience via polling
 
+
 Console AI
+
 
 Clean input-response loop
 
