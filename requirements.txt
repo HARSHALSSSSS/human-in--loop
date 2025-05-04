@@ -1,0 +1,7 @@
+flask
+flask-socketio
+eventlet
+requests
+python-dotenv
+livekit
+livekit-server-sdk==0.4.4  # Make sure you installed the correct version manually or via GitHub
