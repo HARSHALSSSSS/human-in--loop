@@ -60,7 +60,7 @@ Once answered, it responds to the customer.
 bash
 Copy
 Edit
-git clone https://github.com/your-repo/salon_ai_assistant.git
+git clone [](https://github.com/HARSHALSSSSS/human-in--loop)
 cd salon_ai_assistant
 2. Create and activate a virtual environment
 bash
