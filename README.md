@@ -113,7 +113,7 @@ Edit
 pip install livekit-server-sdk
 Serve the customer_ui/index.html from a basic HTTP server or integrate into Flask.
 
-output screenshot :  ![Supervisor UI](images/supervisor_ui_screenshot.png)
+output screenshot :  ![Supervisor UI](https://github.com/HARSHALSSSSS/human-in--loop/blob/main/Screenshot%202025-05-04%20234836.png)
 
 ![Supervisor UI](images/supervisor_ui_screenshot.png)
 
