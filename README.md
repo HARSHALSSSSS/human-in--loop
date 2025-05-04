@@ -115,7 +115,7 @@ Serve the customer_ui/index.html from a basic HTTP server or integrate into Flas
 
 output screenshot :  ![Supervisor UI](https://github.com/HARSHALSSSSS/human-in--loop/blob/main/Screenshot%202025-05-04%20234836.png)
 
-![Supervisor UI](images/supervisor_ui_screenshot.png)
+![Supervisor UI](https://github.com/HARSHALSSSSS/human-in--loop/blob/main/Screenshot%202025-05-04%20234842.png)
 
 🔮 Future Improvements
 ✅ Replace polling with WebSocket-based real-time updates (more efficient)
