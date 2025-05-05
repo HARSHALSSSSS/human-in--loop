@@ -25,6 +25,8 @@ Console mode: Type questions and get responses
 (Optional) Audio mode with LiveKit (under development/tested)
 
 
+NOTE :  RUN BOTH THE FILES AI AGENT AND ALSO THE SUPERVISOR DASHBAORD FOR BETTER INTERACTION 
+
 🚀 How It Works
 🤖 When a customer asks a question:
 The AI agent checks:
